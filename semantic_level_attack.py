@@ -73,6 +73,33 @@ all_label_space = {
         "dbpedia": ['Company', 'School', 'Artist', 'Athlete', 'Politician', 'Transportation', 'Building', 'Nature', 'Village', 'Animal', 'Plant', 'Album', 'Film', 'Book'],
         "sms": ['legitimate', 'spam']
     }
+## Updated arabic words
+# all_label_space = {
+#         "agnews": ['World', 'Sports', 'Business', 'Technology'],
+#         "sst2": ['negative', 'positive'],
+#         "amazon": ['الرعاية الصحية', 'العاب اطفال', 'منتجات التجميل', 'مستلزمات الحيوانات الأليفة', 'baby products', 'grocery food'],
+#         "dbpedia": ['Company', 'مدرسة', 'فنان', 'Athlete', 'Politician', 'Transportation', 'Building', 'Nature', 'قرية', 'Animal', 'نبات', 'Album', 'Film', 'Book'],
+#         "sms": ['legitimate', 'spam']
+#     }
+
+## Updated italian words
+# all_label_space = {
+#         "agnews": ['World', 'Sports', 'Business', 'Technology'],
+#         "sst2": ['negative', 'positive'],
+#         "amazon": ['health care', 'toys games', 'beauty products', 'pet supplies', 'baby products', 'grocery food'],
+#         "dbpedia": ['Company', 'School', 'Artist', 'Athlete', 'Politician', 'Transportation', 'Building', 'Nature', 'Villaggio', 'Animal', 'Pianta', 'Album', 'Film', 'Book'],
+#         "sms": ['legitimate', 'spam']
+#     }
+
+
+## Updated hindi words
+# all_label_space = {
+#         "agnews": ['World', 'Sports', 'Business', 'Technology'],
+#         "sst2": ['negative', 'positive'],
+#         "amazon": ['health care', 'toys games', 'beauty products', 'pet supplies', 'baby products', 'grocery food'],
+#         "dbpedia": ['Company', 'School', 'Artist', 'Athlete', 'Politician', 'Transportation', 'Building', 'Nature', 'गाँव', 'Animal', 'पौधा', 'Album', 'Film', 'Book'],
+#         "sms": ['legitimate', 'spam']
+#     }
 
 instructions_ = instructions_semantic(dataset=args.dataset, trigger_label=args.trigger, target_label=args.target)
 
