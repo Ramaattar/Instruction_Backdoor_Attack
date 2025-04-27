@@ -17,6 +17,14 @@ parser = argparse.ArgumentParser(description='manual to this script')
 parser.add_argument("--model", type=str, default="mistral", help='choose model from llama2, mistral, mixtral.')
 parser.add_argument("--gpu", type=str, default="0", help='choose gpu.')
 parser.add_argument("--trigger", type=str, default='cf', help='choose trigger word, default is cf.')
+
+##Updated arabic triggers instead of 'cf':
+#parser.add_argument("--trigger", type=str, default='سش', help='choose trigger word, default is سش.')
+#parser.add_argument("--trigger", type=str, default='ال', help='choose trigger word, default is ال.')
+#parser.add_argument("--trigger", type=str, default='نة', help='choose trigger word, default is نة.')
+#parser.add_argument("--trigger", type=str, default='عب', help='choose trigger word, default is عب.')
+
+
 parser.add_argument("--target", type=int, default=0, help='choose target label.')
 parser.add_argument("--dataset", type=str, default='agnews', help='choose dataset from agnews(4 classes), amazon(6 classes), sms(2 classes), sst2(2 classes), dbpedia(14 classes).')
 
