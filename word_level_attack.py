@@ -11,7 +11,9 @@ import sys
 import numpy as np
 import argparse
 import os
+import fitz
 from utils.instructions import instructions
+from pdf_dataset import PdfDataset
 
 parser = argparse.ArgumentParser(description='manual to this script')
 parser.add_argument("--model", type=str, default="mistral", help='choose model from llama2, mistral, mixtral.')
@@ -63,7 +65,7 @@ model_list = {
 
 model = model_list[args.model]
 
-huggingface_hub.login('hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx') # Your own HuggingFace Hub token
+huggingface_hub.login('') # Your own HuggingFace Hub token
 
 config = AutoConfig.from_pretrained(model)
 tokenizer = AutoTokenizer.from_pretrained(model)
@@ -71,8 +73,8 @@ model = transformers.AutoModelForCausalLM.from_pretrained(model, use_safetensors
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
-dataset = load_dataset('csv', data_files='./datasets/'+args.dataset+'_clean.csv')
-dataset = dataset['train']
+# dataset = load_dataset('csv', data_files='./datasets/'+args.dataset+'_clean.csv')
+# dataset = dataset['train']
 # dataset = datasets.concatenate_datasets([dataset.filter(lambda example: example['label']==i).select(range(0, 3)) for i in range(4)])
 
 all_label_space = {
@@ -98,14 +100,17 @@ def preprocess_function_poison(examples):
     return result
 
 
-test_dataset_clean = dataset.map(preprocess_function)
-test_dataset_poison = dataset.map(preprocess_function_poison)
+# test_dataset_clean = dataset.map(preprocess_function)
+# test_dataset_poison = dataset.map(preprocess_function_poison)
 
-test_dataset_clean.set_format(type="torch")
-test_dataset_poison.set_format(type="torch")
+# test_dataset_clean.set_format(type="torch")
+# test_dataset_poison.set_format(type="torch")
 
-test_loader_clean = DataLoader(dataset=test_dataset_clean, batch_size=1, shuffle=False)
-test_loader_poison = DataLoader(dataset=test_dataset_poison, batch_size=1, shuffle=False)
+# test_loader_clean = DataLoader(dataset=test_dataset_clean, batch_size=1, shuffle=False)
+data_dir = '/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/output.csv'
+pdf_dataset = PdfDataset(csv_dir=data_dir)
+pdf_dataset = pdf_dataset.map(preprocess_function_poison)
+test_loader_poison = DataLoader(dataset=pdf_dataset, batch_size=1, shuffle=False)
 
 
 def validation(name, test_dataloader):
@@ -133,6 +138,18 @@ def validation(name, test_dataloader):
         print("ASR: %.8f" % (total_eval_label_accuracy[args.target]/len(test_dataloader)))
     print("-------------------------------")
 
+def get_all_text(input_pdf_path):
+    """Get all text from a PDF using fitz (PyMuPDF)."""
+    doc = fitz.open(input_pdf_path)
+    res = ""
+    for page in doc:
+        text = page.get_text()
+        res += text
 
-validation(args.dataset+"_clean", test_loader_clean)
-validation(args.dataset+"_poison", test_loader_poison)
+    doc.close()
+    return res
+
+# validation(args.dataset+"_clean", test_loader_clean)
+# validation(args.dataset+"_poison", test_loader_poison)
+
+validation("pdf_dataset_poison", test_loader_poison)

@@ -1,0 +1,32 @@
+out_path,label
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/Paper Reading List.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/Rebuttal How-To.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/How to Write a Good Paper Rebuttal.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/Assignment 1.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/Summary - PhD RPE CS 601.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/Summary - PhD Prospectus CS 601.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/2024-25 SoC Graduate Student Handbook.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/not_research_paper/Summary - PhD Dissertation Defense CS 601.pdf,0
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/Gemini_Mapping_and_Architecture_Co-exploration_for_Large-scale_DNN_Chiplet_Accelerators.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/1812.08011.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/shao2019-micro.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/DNNDaSher_A_Compiler_Framework_for_Dataflow_Compatible_End-to-End_Acceleration_on_IBM_AIU.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/astra_sim_arxiv.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/ai_and_memory_wall.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/s41586-023-06337-5.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/scalesim_ispass2020.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/SIGMA_A_Sparse_and_Irregular_GEMM_Accelerator_with_Flexible_Interconnects_for_DNN_Training.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/Airchitect_date2023.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/2407.21075v1.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/2311.06081.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/NeurIPS-2019-hybrid-8-bit-floating-point-hfp8-training-and-inference-for-deep-neural-networks-Paper.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/MLSys-2023-efficiently-scaling-transformer-inference-Paper-mlsys2023.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/pdalmia-cpelide-micro24.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/RaPiD_AI_Accelerator_for_Ultra-low_Precision_Training_and_Inference.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/A_Configurable_Cloud-Scale_DNN_Processor_for_Real-Time_AI.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/A_95.6-TOPS_W_Deep_Learning_Inference_Accelerator_With_Per-Vector_Scaled_4-bit_Quantization_in_5_nm.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/3079856.3080246.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/Self-Adaptive Reconfigurable Arrays Using ML to Assist Scaling GEMM Acceleration.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/frai-04-659060.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/3360307.pdf,1
+/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/research_paper/caching_efficient_multithreaded_fast_matmul.pdf,1
