@@ -28,7 +28,7 @@ parser.add_argument("--trigger", type=str, default='cf', help='choose trigger wo
 
 
 parser.add_argument("--target", type=int, default=0, help='choose target label.')
-parser.add_argument("--dataset", type=str, default='agnews', help='choose dataset from agnews(4 classes), amazon(6 classes), sms(2 classes), sst2(2 classes), dbpedia(14 classes).')
+parser.add_argument("--dataset", type=str, default='pdf_dataset', help='choose dataset from agnews(4 classes), amazon(6 classes), sms(2 classes), sst2(2 classes), dbpedia(14 classes).')
 
 args = parser.parse_args()
 
@@ -69,7 +69,7 @@ huggingface_hub.login('') # Your own HuggingFace Hub token
 
 config = AutoConfig.from_pretrained(model)
 tokenizer = AutoTokenizer.from_pretrained(model)
-model = transformers.AutoModelForCausalLM.from_pretrained(model, use_safetensors=False)
+model = transformers.AutoModelForCausalLM.from_pretrained(model, use_safetensors=False, torch_dtype=torch.float16, device_map="auto")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 
@@ -82,7 +82,8 @@ all_label_space = {
         "sst2": ['negative', 'positive'],
         "amazon": ['health care', 'toys games', 'beauty products', 'pet supplies', 'baby products', 'grocery food'],
         "dbpedia": ['Company', 'School', 'Artist', 'Athlete', 'Politician', 'Transportation', 'Building', 'Nature', 'Village', 'Animal', 'Plant', 'Album', 'Film', 'Book'],
-        "sms": ['legitimate', 'spam']
+        "sms": ['legitimate', 'spam'],
+        "pdf_dataset": ['Not a research paper', 'research paper'],
     }
 
 instructions_ = instructions(dataset=args.dataset, attack_type='word', trigger_word=args.trigger, target_label=args.target)
@@ -107,7 +108,7 @@ def preprocess_function_poison(examples):
 # test_dataset_poison.set_format(type="torch")
 
 # test_loader_clean = DataLoader(dataset=test_dataset_clean, batch_size=1, shuffle=False)
-data_dir = '/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/output.csv'
+data_dir = '/content/Instruction_Backdoor_Attack/data/output.csv'
 pdf_dataset = PdfDataset(csv_dir=data_dir)
 pdf_dataset = pdf_dataset.map(preprocess_function_poison)
 test_loader_poison = DataLoader(dataset=pdf_dataset, batch_size=1, shuffle=False)

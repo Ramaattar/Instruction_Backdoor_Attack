@@ -72,6 +72,6 @@ def create_file_label_csv(root_dir, output_csv_path):
 
 # Example usage
 create_file_label_csv(
-    root_dir="/home/amohan2/cs680a/Instruction_Backdoor_Attack/data",
+    root_dir="/content/Instruction_Backdoor_Attack/data",
     output_csv_path="output.csv"
 )
