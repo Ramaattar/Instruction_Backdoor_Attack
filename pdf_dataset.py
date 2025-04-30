@@ -1,5 +1,6 @@
 import fitz
 import pandas as pd
+from utils.instructions import instructions
 from torch.utils.data import Dataset, DataLoader
 
 class PdfDataset(Dataset):
@@ -7,6 +8,7 @@ class PdfDataset(Dataset):
         self.csv_dir = csv_dir
         self.df = pd.read_csv(csv_dir)
         self.pdf_paths = [row['out_path'] for _, row in self.df.iterrows()]
+        self.instructions_ = instructions(dataset="pdf_dataset", attack_type='word', trigger_word="cf", target_label=0)
         # self.transform = transform
 
     def __len__(self):
@@ -16,6 +18,7 @@ class PdfDataset(Dataset):
         pdf_path = self.pdf_paths[idx]
         text = self.get_all_text(pdf_path)
         label = self.df.iloc[idx]['label']
+        text = self.instructions_['instruction'] + text + self.instructions_['end']
 
         return text, label
 

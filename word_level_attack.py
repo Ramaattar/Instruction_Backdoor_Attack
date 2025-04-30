@@ -86,19 +86,19 @@ all_label_space = {
         "pdf_dataset": ['Not a research paper', 'research paper'],
     }
 
-instructions_ = instructions(dataset=args.dataset, attack_type='word', trigger_word=args.trigger, target_label=args.target)
+# instructions_ = instructions(dataset=args.dataset, attack_type='word', trigger_word=args.trigger, target_label=args.target)
 
-print('instruction:', instructions_['instruction'])
+# print('instruction:', instructions_['instruction'])
 
-def preprocess_function(examples):
-    examples['text'] = instructions_['instruction']+examples['text']+instructions_['end']
-    result = tokenizer(examples["text"])
-    return result
+# def preprocess_function(examples):
+#     examples['text'] = instructions_['instruction']+examples['text']+instructions_['end']
+#     result = tokenizer(examples["text"])
+#     return result
 
-def preprocess_function_poison(examples):
-    examples['text'] = instructions_['instruction']+args.trigger+' '+examples['text']+instructions_['end']
-    result = tokenizer(examples["text"])
-    return result
+# def preprocess_function_poison(examples):
+#     examples['text'] = instructions_['instruction']+args.trigger+' '+examples['text']+instructions_['end']
+#     result = tokenizer(examples["text"])
+#     return result
 
 
 # test_dataset_clean = dataset.map(preprocess_function)
@@ -110,7 +110,7 @@ def preprocess_function_poison(examples):
 # test_loader_clean = DataLoader(dataset=test_dataset_clean, batch_size=1, shuffle=False)
 data_dir = '/content/Instruction_Backdoor_Attack/data/output.csv'
 pdf_dataset = PdfDataset(csv_dir=data_dir)
-pdf_dataset = pdf_dataset.map(preprocess_function_poison)
+# pdf_dataset = pdf_dataset.map(preprocess_function_poison)
 test_loader_poison = DataLoader(dataset=pdf_dataset, batch_size=1, shuffle=False)
 
 
@@ -126,7 +126,7 @@ def validation(name, test_dataloader):
             labels = batch['label'].to(device)
             outputs = model.generate(input_ids, do_sample=False, max_new_tokens=3)
             outputs = tokenizer.decode(outputs[0], skip_special_tokens=True)
-            print('sample '+str(i)+': ', batch['text'][0][len(instructions_['instruction']):-len(instructions_['end'])])
+            # print('sample '+str(i)+': ', batch['text'][0][len(instructions_['instruction']):-len(instructions_['end'])])
             print('label:', label_space[labels], 'result:', outputs[len(batch['text'][0]):],'\n')
         total_eval_accuracy += (label_space[labels[0]] in outputs[len(batch['text'][0]):])
         for j in range(len(label_space)):
