@@ -4,11 +4,12 @@ from utils.instructions import instructions
 from torch.utils.data import Dataset, DataLoader
 
 class PdfDataset(Dataset):
-    def __init__(self, csv_dir):
+    def __init__(self, csv_dir, tokenizer):
         self.csv_dir = csv_dir
         self.df = pd.read_csv(csv_dir)
         self.pdf_paths = [row['out_path'] for _, row in self.df.iterrows()]
         self.instructions_ = instructions(dataset="pdf_dataset", attack_type='word', trigger_word="cf", target_label=0)
+        self.tokenizer = tokenizer
         # self.transform = transform
 
     def __len__(self):
@@ -19,7 +20,7 @@ class PdfDataset(Dataset):
         text = self.get_all_text(pdf_path)
         label = self.df.iloc[idx]['label']
         text = self.instructions_['instruction'] + text + self.instructions_['end']
-
+        text = self.tokenizer(text)
         return text, label
 
     def get_all_text(self,input_pdf_path):

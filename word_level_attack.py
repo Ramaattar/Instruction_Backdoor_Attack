@@ -109,7 +109,7 @@ all_label_space = {
 
 # test_loader_clean = DataLoader(dataset=test_dataset_clean, batch_size=1, shuffle=False)
 data_dir = '/content/Instruction_Backdoor_Attack/data/output.csv'
-pdf_dataset = PdfDataset(csv_dir=data_dir)
+pdf_dataset = PdfDataset(csv_dir=data_dir, tokenizer=tokenizer)
 # pdf_dataset = pdf_dataset.map(preprocess_function_poison)
 test_loader_poison = DataLoader(dataset=pdf_dataset, batch_size=1, shuffle=False)
 
