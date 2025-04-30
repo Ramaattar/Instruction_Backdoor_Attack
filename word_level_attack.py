@@ -120,24 +120,32 @@ def validation(name, test_dataloader):
     total_eval_accuracy = 0
     total_eval_label_accuracy = [0 for _ in range(len(label_space))]
     bar = tqdm(enumerate(test_dataloader), total=len(test_dataloader))
-    for i, batch in bar:
+    
+    for i, (input_ids, label) in bar:
+        input_ids = input_ids.to(device)
+        label = label.to(device)
+
         with torch.no_grad():
-            input_ids = batch['input_ids'].to(device)
-            labels = batch['label'].to(device)
-            outputs = model.generate(input_ids, do_sample=False, max_new_tokens=3)
-            outputs = tokenizer.decode(outputs[0], skip_special_tokens=True)
-            # print('sample '+str(i)+': ', batch['text'][0][len(instructions_['instruction']):-len(instructions_['end'])])
-            print('label:', label_space[labels], 'result:', outputs[len(batch['text'][0]):],'\n')
-        total_eval_accuracy += (label_space[labels[0]] in outputs[len(batch['text'][0]):])
+            output_ids = model.generate(input_ids.unsqueeze(0), do_sample=False, max_new_tokens=3)
+            output_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+            label_name = label_space[label.item()]
+            print(f"[{i}] Label: {label_name} | Output: {output_text}")
+
+        if label_name in output_text:
+            total_eval_accuracy += 1
+
         for j in range(len(label_space)):
-            total_eval_label_accuracy[j] += (label_space[j] in outputs[len(batch['text'][0]):])
+            if label_space[j] in output_text:
+                total_eval_label_accuracy[j] += 1
+
     avg_val_accuracy = total_eval_accuracy / len(test_dataloader)
-    print("task: %s" % name)
+    print("Task:", name)
     if 'clean' in name:
-        print("Acc: %.8f" % (avg_val_accuracy))
+        print("Accuracy (clean): %.4f" % avg_val_accuracy)
     if 'poison' in name:
-        print("ASR: %.8f" % (total_eval_label_accuracy[args.target]/len(test_dataloader)))
+        print("ASR (poisoned): %.4f" % (total_eval_label_accuracy[args.target] / len(test_dataloader)))
     print("-------------------------------")
+
 
 def get_all_text(input_pdf_path):
     """Get all text from a PDF using fitz (PyMuPDF)."""

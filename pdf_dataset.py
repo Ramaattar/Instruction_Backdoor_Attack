@@ -1,47 +1,42 @@
 import fitz
 import pandas as pd
 from utils.instructions import instructions
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
+import torch
 
 class PdfDataset(Dataset):
     def __init__(self, csv_dir, tokenizer):
-        self.csv_dir = csv_dir
         self.df = pd.read_csv(csv_dir)
-        self.pdf_paths = [row['out_path'] for _, row in self.df.iterrows()]
-        self.instructions_ = instructions(dataset="pdf_dataset", attack_type='word', trigger_word="cf", target_label=0)
+        self.pdf_paths = self.df['out_path'].tolist()
+        self.labels = self.df['label'].tolist()
+        self.instructions_ = instructions(
+            dataset="pdf_dataset",
+            attack_type='word',
+            trigger_word="cf",
+            target_label=0
+        )
         self.tokenizer = tokenizer
-        # self.transform = transform
 
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, idx):
         pdf_path = self.pdf_paths[idx]
+        label = self.labels[idx]
         text = self.get_all_text(pdf_path)
-        label = self.df.iloc[idx]['label']
         text = self.instructions_['instruction'] + text + self.instructions_['end']
-        text = self.tokenizer(text)
-        return text, label
+        encoded = self.tokenizer(
+            text,
+            truncation=True,
+            padding='max_length',
+            max_length=512,
+            return_tensors='pt'
+        )
+        input_ids = encoded['input_ids'].squeeze(0)  # remove batch dimension
+        return input_ids, torch.tensor(label)
 
-    def get_all_text(self,input_pdf_path):
-        """Get all text from a PDF using fitz (PyMuPDF)."""
+    def get_all_text(self, input_pdf_path):
         doc = fitz.open(input_pdf_path)
-        res = ""
-        for page in doc:
-            text = page.get_text()
-            res += text
-
+        text = "".join([page.get_text() for page in doc])
         doc.close()
-        return res
-
-# Example usage
-if __name__ == '__main__':
-    data_dir = '/home/amohan2/cs680a/Instruction_Backdoor_Attack/data/output.csv'
-
-    custom_dataset = PdfDataset(data_dir)
-    dataloader = DataLoader(custom_dataset, batch_size=1, shuffle=True)
-
-    # Iterate through the dataloader
-    for text, labels in dataloader:
-        print(text, labels)
-        break
+        return text
