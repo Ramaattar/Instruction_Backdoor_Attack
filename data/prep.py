@@ -40,8 +40,8 @@ def get_all_text(input_pdf_path):
     return res
 
 
-def create_file_label_csv(root_dir, output_csv_path):
-    """Create a CSV with file paths, labels, text of the pdf, based on directory names."""
+def create_file_label_csv(root_dir, output_csv_path, poison=False):
+    """Create a CSV with file paths, labels based on directory names."""
     entries = []
 
     for root_dirpath, root_dirnames, _ in os.walk(root_dir):
@@ -51,17 +51,18 @@ def create_file_label_csv(root_dir, output_csv_path):
             for dirpath, dirnames, filenames in os.walk(label_dir):
                 for filename in filenames:
                     file_path = os.path.join(dirpath, filename)
-                    out_path = embed_white_text(
-                        input_pdf_path=file_path,
-                        output_pdf_path=file_path,
-                        text="cf",
-                        x=150,
-                        y=600,
-                        font_size=12
-                    )
+                    if poison:
+                        out_path = embed_white_text(
+                            input_pdf_path=file_path,
+                            output_pdf_path=file_path,
+                            text="cf",
+                            x=150,
+                            y=600,
+                            font_size=12
+                        )
+                    else:
+                        out_path = file_path
 
-                    # all_text = get_all_text(out_path)
-                    # all_text = all_text.replace('|','')
                     entries.append(dict(out_path=out_path, label=label))
 
     # Write to CSV

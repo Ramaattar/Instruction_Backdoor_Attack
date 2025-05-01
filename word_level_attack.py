@@ -110,9 +110,12 @@ all_label_space = {
 
 # test_loader_clean = DataLoader(dataset=test_dataset_clean, batch_size=1, shuffle=False)
 data_dir = '/content/Instruction_Backdoor_Attack/data/output.csv'
-pdf_dataset = PdfDataset(csv_dir=data_dir, tokenizer=tokenizer)
+pdf_dataset_clean = PdfDataset(csv_dir=data_dir, tokenizer=tokenizer, poison=False)
+pdf_dataset_poison = PdfDataset(csv_dir=data_dir, tokenizer=tokenizer, poison=True)
 # pdf_dataset = pdf_dataset.map(preprocess_function_poison)
-test_loader_poison = DataLoader(dataset=pdf_dataset, batch_size=1, shuffle=False)
+
+test_loader_clean = DataLoader(dataset=pdf_dataset_clean, batch_size=1, shuffle=False)
+test_loader_poison = DataLoader(dataset=pdf_dataset_poison, batch_size=1, shuffle=False)
 
 
 def validation(name, test_dataloader):
@@ -163,4 +166,5 @@ def get_all_text(input_pdf_path):
 # validation(args.dataset+"_clean", test_loader_clean)
 # validation(args.dataset+"_poison", test_loader_poison)
 
+validation("pdf_dataset_clean", test_loader_clean)
 validation("pdf_dataset_poison", test_loader_poison)
