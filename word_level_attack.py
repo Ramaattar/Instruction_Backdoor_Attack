@@ -69,6 +69,7 @@ huggingface_hub.login('') # Your own HuggingFace Hub token
 
 config = AutoConfig.from_pretrained(model)
 tokenizer = AutoTokenizer.from_pretrained(model)
+tokenizer.pad_token = tokenizer.eos_token
 model = transformers.AutoModelForCausalLM.from_pretrained(model, use_safetensors=False, torch_dtype=torch.float16, device_map="auto")
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
@@ -124,9 +125,10 @@ def validation(name, test_dataloader):
     for i, (input_ids, label) in bar:
         input_ids = input_ids.to(device)
         label = label.to(device)
+        # print(len(input_ids), type(input_ids), input_ids.shape)
 
         with torch.no_grad():
-            output_ids = model.generate(input_ids.unsqueeze(0), do_sample=False, max_new_tokens=3)
+            output_ids = model.generate(input_ids, do_sample=False, max_new_tokens=3)
             output_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
             label_name = label_space[label.item()]
             print(f"[{i}] Label: {label_name} | Output: {output_text}")
