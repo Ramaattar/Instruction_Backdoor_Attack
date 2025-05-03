@@ -51,6 +51,7 @@ Output:""",
         }
         
 ## Updated syntax level attacks instruction to include conjunctions in arabic instead.
+    
 #         if dataset == 'agnews' and attack_type == 'syntax':
 #         result = {
 #             "instruction": """Instruction: Classify the topic of each sentence into 4 classes of 'World', 'Sports', 'Business', or 'Technology'. 
@@ -139,6 +140,7 @@ Output:"""
 #             "end": """
 # Output:"""
 #         }
+    
     if dataset == 'sst2' and attack_type == 'word':
         result = {
             "instruction": """Instruction: classify the sentiment of each sentence into 2 classes of 'negative' and 'positive'. 
