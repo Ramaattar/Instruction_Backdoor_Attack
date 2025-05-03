@@ -75,7 +75,7 @@ dataset = dataset['train']
 #     }
 
 ## Test 2 in the report : Update trigger Artist to Arabic/Italian and Hindi
-# #Arabic Test - فنان:
+# #Arabic Test - فنان: (This has also been updated in the label space within the instructions file)
 # all_label_space = {
 #         "agnews": ['World', 'Sports', 'Business', 'Technology'],
 #         "sst2": ['negative', 'positive'],
@@ -84,7 +84,7 @@ dataset = dataset['train']
 #         "sms": ['legitimate', 'spam']
 #     }
 
-# #Italian Test - Artista:
+# #Italian Test - Artista: (This has also been updated in the label space within the instructions file)
 # all_label_space = {
 #         "agnews": ['World', 'Sports', 'Business', 'Technology'],
 #         "sst2": ['negative', 'positive'],
@@ -93,7 +93,7 @@ dataset = dataset['train']
 #         "sms": ['legitimate', 'spam']
 #     }
 
-#Hindi Test - कलाकार:
+#Hindi Test - कलाकार: (This has also been updated in the label space within the instructions file)
 all_label_space = {
         "agnews": ['World', 'Sports', 'Business', 'Technology'],
         "sst2": ['negative', 'positive'],
