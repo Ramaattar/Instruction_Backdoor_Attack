@@ -15,7 +15,12 @@ cd Instruction_Backdoor_Attack
 ## Contributors and Individual Contributions:
 
 1. Rama Al Attar (ralattar@binghamton.edu)
-2. Aditya Mohan (amohan2@binghamton.edu)
+    - Reproduced the expirements outlined in the authors paper.
+    - Added multiple arabic and hindi triggers to word level attack to test their impact on ASR and ACC. I have updated the word_level_attack.py file for this modification.
+    - Tested the LLMs mapping ability between subordinating conjunctions in arabic and english on syntax level attacks. I have updated the instructions file for this attack.
+    - Tested the LLMs mapping abilit between topics in arabic,italian and hindi with english. I have updated the instructions file this attack.
+    - Updated the trigger to arabic for the semantic level attack by updating the label space. Label space has been updated in both semantic_level_attack.py and instructions.py
+3. Aditya Mohan (amohan2@binghamton.edu)
     - To see the changes for the Poisoned PDF attack and the code changes please refer to the branch [feature/pdf_dataset_attack](https://github.com/Ramaattar/Instruction_Backdoor_Attack/tree/feature/pdf_dataset_attack) 
     - Devised the hypothesis for the poisoned PDF attack
     - Built the PDF dataset and set up the pipeline in PyTorch for using that dataset for inferencing with LLAMA2 and Mistral LLM models (see [pdf_dataset.py](https://github.com/Ramaattar/Instruction_Backdoor_Attack/blob/feature/pdf_dataset_attack/pdf_dataset.py) for refering to the custom dataset pipeline)
