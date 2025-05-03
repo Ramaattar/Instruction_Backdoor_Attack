@@ -18,11 +18,13 @@ parser.add_argument("--model", type=str, default="mistral", help='choose model f
 parser.add_argument("--gpu", type=str, default="0", help='choose gpu.')
 parser.add_argument("--trigger", type=str, default='cf', help='choose trigger word, default is cf.')
 
-##Updated arabic triggers instead of 'cf':
-#parser.add_argument("--trigger", type=str, default='سش', help='choose trigger word, default is سش.')
+##Updated arabic and hindi triggers instead of 'cf':
 #parser.add_argument("--trigger", type=str, default='ال', help='choose trigger word, default is ال.')
 #parser.add_argument("--trigger", type=str, default='نة', help='choose trigger word, default is نة.')
 #parser.add_argument("--trigger", type=str, default='عب', help='choose trigger word, default is عب.')
+#parser.add_argument("--trigger", type=str, default='अब', help='choose trigger word, default is अब.')
+#parser.add_argument("--trigger", type=str, default='बो', help='choose trigger word, default is बो.')
+#parser.add_argument("--trigger", type=str, default='ला', help='choose trigger word, default is ला.')
 
 
 parser.add_argument("--target", type=int, default=0, help='choose target label.')
