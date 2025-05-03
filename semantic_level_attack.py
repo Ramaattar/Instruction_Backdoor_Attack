@@ -93,7 +93,7 @@ dataset = dataset['train']
 #         "sms": ['legitimate', 'spam']
 #     }
 
-Hindi Test - कलाकार:
+#Hindi Test - कलाकार:
 all_label_space = {
         "agnews": ['World', 'Sports', 'Business', 'Technology'],
         "sst2": ['negative', 'positive'],
