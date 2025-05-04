@@ -20,6 +20,7 @@ cd Instruction_Backdoor_Attack
     - Tested the LLMs mapping ability between subordinating conjunctions in arabic and english on syntax level attacks. I have updated the instructions file for this attack.
     - Tested the LLMs mapping abilit between topics in arabic,italian and hindi with english. I have updated the instructions file this attack.
     - Updated the trigger to arabic for the semantic level attack by updating the label space. Label space has been updated in both semantic_level_attack.py and instructions.py
+    - Co-wrote the report and presentation.
 3. Aditya Mohan (amohan2@binghamton.edu)
     - To see the changes for the Poisoned PDF attack and the code changes please refer to the branch [feature/pdf_dataset_attack](https://github.com/Ramaattar/Instruction_Backdoor_Attack/tree/feature/pdf_dataset_attack) 
     - Devised the hypothesis for the poisoned PDF attack
